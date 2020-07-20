@@ -11,17 +11,16 @@ const ping = require('./ping.js');
 const count = require('./count.js');
 const isRight = require('./is-right.js');
 const image = require('./image.js');
-const randomDino = require('./random-dino.js');
 const points = require('./points.js');
 const give = require('./give.js');
-const kill = require('./kill.js');
 
-const runnables = [ping,count,isRight,image,randomDino,/*points,give,*/prefix,kill];
+
+const runnables = [ping,count,isRight,image,/*points,give,*/prefix];
 
 // ---------------------- Discord ---------------------- //
 
 const client = new Discord.Client();
-const token = 'REPLACE WITH ENV';
+const token = 'NzI3NTE0Njc3OTg2NDU5NzU4.XxW6fQ.Bd8sB6EmvpaxOuVSZr2K3bxnIqQ';
 
 // ---------------------- Ready ---------------------- //
 
