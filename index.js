@@ -20,7 +20,7 @@ const runnables = [ping,count,isRight,image,/*points,give,*/prefix];
 // ---------------------- Discord ---------------------- //
 
 const client = new Discord.Client();
-const token = 'NzI3NTE0Njc3OTg2NDU5NzU4.XxW6fQ.Bd8sB6EmvpaxOuVSZr2K3bxnIqQ';
+const token = 'REPLACE WITH ENV';
 
 // ---------------------- Ready ---------------------- //
 
