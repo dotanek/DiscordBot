@@ -3,7 +3,7 @@ const models = require('./models.js')
 
 module.exports = {
     init: async (client) => { 
-        mongoose.connect('mongodb://localhost/dotbase',db_options, err => {
+        mongoose.connect('mongodb+srv://Dotbot:Dotbotpassword123@cluster.5axtm.gcp.mongodb.net/dotbot-database',db_options, err => {
             if (err) {
                 console.log(err);
             }

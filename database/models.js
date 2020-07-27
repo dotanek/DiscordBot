@@ -4,8 +4,8 @@ module.exports = {
 
     init: () => {
 
-        module.exports.Points = mongoose.model('Points', points_schema);
-        module.exports.Prefixes = mongoose.model('Prefixes', prefixes_schema)
+        module.exports.Points = mongoose.model('user-points', points_schema);
+        module.exports.Prefixes = mongoose.model('server-prefixes', prefixes_schema)
     }
 }
 

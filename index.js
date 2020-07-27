@@ -1,32 +1,31 @@
 // ---------------------- Main imports ---------------------- //
 
 const Discord = require('discord.js');
-const mongoose = require('./mongoose.js');
-const prefix = require('./prefix.js');
-
+const mongoose = require('./database/mongoose.js');
 
 // ---------------------- Command imports ---------------------- //
 
-const ping = require('./ping.js');
-const count = require('./count.js');
-const isRight = require('./is-right.js');
-const image = require('./image.js');
-const points = require('./points.js');
-const give = require('./give.js');
+const ping = require('./commands/ping.js');
+const count = require('./commands/count.js');
+const anwser = require('./commands/anwser.js');
+const image = require('./commands/image.js');
+//const points = require('./points.js');
+//const give = require('./give.js');
 
 
-const runnables = [ping,count,isRight,image,/*points,give,*/prefix];
+const runnables = [ping,count,anwser,image];
 
 // ---------------------- Discord ---------------------- //
 
 const client = new Discord.Client();
-const token = 'REPLACE WITH ENV';
+const token = 'NzI3NTE0Njc3OTg2NDU5NzU4.XxXqwQ.N6BkEvJYsVXUudJdVPVzUPWZLGg';
+const prefix = '.';
 
 // ---------------------- Ready ---------------------- //
 
 client.on('ready', () => {
     console.log('Bot is online.');
-    client.user.setActivity('Healthy!',{type:'WATCHING'});
+    client.user.setActivity('Healthy! | Prefix "."',{type:'WATCHING'});
 });
 
 // ---------------------- Message ---------------------- //
@@ -37,14 +36,8 @@ client.on('message', async msg => {
         return;
     }
 
-    let server_prefix = '!';
-
-    if (typeof msg.channel.guild != 'undefined') {
-        server_prefix = await prefix.load(msg);
-    }
-
-    if (msg.content.startsWith(server_prefix)) {
-        let args = msg.content.substr(server_prefix.length).split(' ');
+    if (msg.content.startsWith(prefix)) {
+        let args = msg.content.substr(prefix.length).split(' ');
         let command = args.shift();
         let runnable = runnables.find(r => r.name == command);
 
@@ -53,8 +46,6 @@ client.on('message', async msg => {
         } else {
             console.log('Unrecognized command.');
         }
-    } else if (typeof msg.channel.guild != 'undefined' && (/^\<\@\!?[0-9]*\>$/g).test(msg.content) && msg.mentions.users.first() == client.user) {
-        msg.channel.send(`My prefix in this server is **${server_prefix}**`);
     }
 });
 
