@@ -18,7 +18,7 @@ const runnables = [ping,count,anwser,image];
 // ---------------------- Discord ---------------------- //
 
 const client = new Discord.Client();
-const token = 'NzI3NTE0Njc3OTg2NDU5NzU4.XxXqwQ.N6BkEvJYsVXUudJdVPVzUPWZLGg';
+const token = 'TOKEN';
 const prefix = '.';
 
 // ---------------------- Ready ---------------------- //
