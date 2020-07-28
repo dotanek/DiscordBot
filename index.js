@@ -25,7 +25,7 @@ const prefix = '.';
 
 // ---------------------- Mongoose ---------------------- //
 
-const db_password = process.env.db_password || process.env.local_dbpassword;
+const db_password = process.env.dbpassword || process.env.local_dbpassword;
 
 // ---------------------- Ready ---------------------- //
 
