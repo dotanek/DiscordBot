@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 
 module.exports = {
     name: 'image',
+    usage: '.image [keywords]',
     description: 'Counts the amount of messages containing given word.',
     run: (msg,args) => {
 

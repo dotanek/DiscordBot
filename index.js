@@ -9,13 +9,43 @@ dotenv.config()
 
 const ping = require('./commands/ping.js');
 const count = require('./commands/count.js');
-const anwser = require('./commands/anwser.js');
+const answer = require('./commands/answer.js');
 const image = require('./commands/image.js');
 //const points = require('./points.js');
 //const give = require('./give.js');
 
+const help = {
+    name: 'help',
+    description: 'Shows this list.',
+    usage:'.help [optional - command]',
+    run: (msg,args) => {
+        const embed = new Discord.MessageEmbed()
+            .setColor('#0099ff');
 
-const runnables = [ping,count,anwser,image];
+        if (args.length == 1) {
+            let cmd = runnables.find(r => r.name == args);
+
+            if (typeof cmd == 'undefined') {
+                return msg.channel.send('Unrecognized command.');
+            }
+
+            embed
+                .setTitle(`Command '${cmd.name}'`)
+                .addFields({name:'Description',value:cmd.description},{name:'Usage',value:cmd.usage});
+
+        } else {
+            let fields = runnables.map(c => c = {name:c.name,value:c.description});
+            embed
+                .setTitle('DotBot commands')
+                .addFields(fields)
+                .setFooter('Type ".help <command>" for details.');
+        }
+
+        msg.channel.send(embed);
+    }
+}
+
+const runnables = [ping,count,answer,image,help];
 
 // ---------------------- Discord ---------------------- //
 

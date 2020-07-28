@@ -3,6 +3,7 @@ const models = require('./models.js')
 
 module.exports = {
     name: 'give',
+    usage: '.anwser',
     description: 'Transfers certain amount of points to given user.',
     run: async (msg,args) => {
         if (mongoose.connection.readyState != 1){

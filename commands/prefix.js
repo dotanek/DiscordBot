@@ -5,6 +5,7 @@ let servers_cache = [];
 
 module.exports = {
     name: 'prefix',
+    usage: '',
     description: 'Changes prefix for the bot commands.',
     run: async (msg,args) => {
         if (mongoose.connection.readyState != 1){

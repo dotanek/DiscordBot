@@ -3,6 +3,7 @@ const models = require('./models.js')
 
 module.exports = {
     name: 'points',
+    usage: '',
     description: 'Shows the amount of points that given user has.',
     run: async (msg,args) => {
         if (mongoose.connection.readyState != 1){

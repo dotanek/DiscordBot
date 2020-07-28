@@ -1,6 +1,7 @@
 module.exports = {
     name: 'count',
     description: 'Counts the amount of messages containing given word.',
+    usage: '.count [optional - user] [word]',
     run: async (msg,args) => {
 
         let regex = /\<\@\!?[0-9]*\>/g;
