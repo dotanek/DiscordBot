@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const models = require('./models.js')
 
 module.exports = {
-    init: async (client) => { 
-        mongoose.connect(`mongodb+srv://Dotbot:${process.env.dbpassword}@cluster.5axtm.gcp.mongodb.net/dotbot-database`,db_options, err => {
+    init: async (client,db_password) => { 
+        mongoose.connect(`mongodb+srv://Dotbot:${db_password}@cluster.5axtm.gcp.mongodb.net/dotbot-database`,db_options, err => {
             if (err) {
                 console.log(err);
             }

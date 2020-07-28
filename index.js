@@ -2,6 +2,8 @@
 
 const Discord = require('discord.js');
 const mongoose = require('./database/mongoose.js');
+const dotenv = require("dotenv")
+dotenv.config()
 
 // ---------------------- Command imports ---------------------- //
 
@@ -18,8 +20,12 @@ const runnables = [ping,count,anwser,image];
 // ---------------------- Discord ---------------------- //
 
 const client = new Discord.Client();
-const token = process.env.token;
+const token = process.env.token || process.env.local_token;
 const prefix = '.';
+
+// ---------------------- Mongoose ---------------------- //
+
+const db_password = process.env.db_password || process.env.local_dbpassword;
 
 // ---------------------- Ready ---------------------- //
 
@@ -51,5 +57,5 @@ client.on('message', async msg => {
 
 // ---------------------- Login ---------------------- //
 
-mongoose.init(client);
+mongoose.init(client,db_password);
 client.login(token);
