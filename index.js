@@ -18,7 +18,7 @@ const runnables = [ping,count,anwser,image];
 // ---------------------- Discord ---------------------- //
 
 const client = new Discord.Client();
-const token = 'TOKEN';
+const token = process.env.token;
 const prefix = '.';
 
 // ---------------------- Ready ---------------------- //
