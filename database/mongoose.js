@@ -10,6 +10,10 @@ module.exports = {
         });
         mongoose.client = client;
         models.init();
+    },
+
+    status: () => {
+        return mongoose.connection.readyState;
     }
 }
 
