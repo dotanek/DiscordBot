@@ -38,9 +38,6 @@ module.exports = {
         let exp = parseInt(victim.value * (victim.value / killer.value));
 
         if (mongoose.status() != 1){
-
-            return console.log(mongoose.status());
-
             return msg.channel.send('The database is currently unavailable.');
         }
 
