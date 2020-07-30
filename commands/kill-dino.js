@@ -17,10 +17,9 @@ module.exports = {
             .setTitle('List of dinosaurs:')
             .setDescription(dinosaurs.map(d => d.name).join('\n'));
 
+            return msg.channel.send(embed);
 
-        return msg.channel.send(embed);
-
-        } else if (args.length != 2) {
+        } else if (args.length < 2) {
             return msg.channel.send('Invalid arguments.');
         }
 
@@ -41,43 +40,102 @@ module.exports = {
             return msg.channel.send('The database is currently unavailable.');
         }
 
+        let DinoKills = models.DinoKills;
         let DinoLevels = models.DinoLevels;
-        let document = await DinoLevels.findOne({userID: msg.author.id});
 
-        if (document == null) {
-            document = new DinoLevels({ userID:msg.author.id, level:1, experience:0 });
-        } 
-
-        let current_level = document.level;
-        let next_level = exp_base * Math.pow(exp_step,current_level);
+        let document_kills = new DinoKills({
+            userID:msg.author.id,
+            userName:msg.author.username,
+            killer:killer.name,
+            victim:victim.name,
+            comment: args.slice(2).join(' ')
+        });
         
-        //console.log(document);
+        let document_levels = await DinoLevels.findOne({ userID:msg.author.id });
+        let level_up = false;
 
+        if (document_levels == null) {
+            document_levels = new DinoLevels({
+                userID:msg.author.id,
+                userName:msg.author.username,
+                level:1, experience:0
+            });
+            level_up = true;
+        }
 
-        let embed = new Discord.MessageEmbed()
-            .setColor('#0099ff')
-            .setTitle(`${msg.author.username} has killed ${victim.name} as ${killer.name}.`)
-            .setDescription(`This kill was worth ${exp} xp!`);
+        let current_level = document_levels.level;
+        let current_exp = document_levels.experience + exp;
+        let next_level = exp_base * Math.pow(exp_step,current_level);
 
-        msg.channel.send(embed);
+        while (current_exp >= next_level) {
+            current_level++;
+            current_exp -= next_level;
+            next_level = exp_base * Math.pow(exp_step,current_level);
+            level_up = true;
+        }
+
+        document_levels.level = current_level;
+        document_levels.experience = current_exp;
+
+        await document_levels.save(err => {
+            if (err) {
+                return msg.channel.send('An error occured while operating on database.');
+            }
+
+            document_kills.save();
+
+            let embed = new Discord.MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle(`${msg.author.username} has killed ${victim.name} as ${killer.name}.`)
+                .setDescription(`This kill was worth ${exp} xp!`);
+
+            msg.channel.send(embed);
+            
+            if (level_up) {
+                embed
+                    .setColor('#0099ff')
+                    .setTitle(`Level up!`)
+                    .setDescription(`${msg.author} is now at level ${current_level}.`)
+
+                msg.channel.send(embed);
+            }
+        });
+
+        return;
     }
 }
 
 const dinosaurs = [
-    { id: 1, name: 'Allosaurus', value: 100 },
-    { id: 2, name: 'Ceratosaurus', value: 100 },
-    { id: 3, name: 'Dilophosaurus', value: 100 },
-    { id: 4, name: 'Giganotosaurus', value: 100 },
-    { id: 5, name: 'Suchomimus', value: 100 },
-    { id: 6, name: 'Utahraptor', value: 100 },
-    { id: 7, name: 'Tyrannosaurus', value: 1000 },
-    { id: 8, name: 'Diabloceratops', value: 100 },
-    { id: 9, name: 'Dryosaurus', value: 100 },
-    { id: 10, name: 'Gallimimus', value: 100 },
-    { id: 11, name: 'Maiasaura', value: 100 },
-    { id: 12, name: 'Pachycephalosaurus', value: 100 },
-    { id: 13, name: 'Parasaurolophus', value: 100 },
-    { id: 14, name: 'Triceratops', value: 100 }
+    {name: '\n**Herbivores**,', value: 0 },
+    {name: 'Gallimimus', value: 30 },
+    {name: 'Pachycephalosaurus', value: 30 },
+    {name: 'Maiasaura', value: 40 },
+    {name: 'Diabloceratops', value: 50 },
+    {name: 'Parasaurolophus', value: 50 },
+    {name: 'Stegosaurus', value: 70 },
+    {name: 'Ankylosaurus', value: 70 },
+    {name: 'Therizinosaur', value: 90 },
+    {name: 'Triceratops', value: 90 },
+    {name: 'Shantungosaurus', value: 90 },
+    {name: 'Camarasaurus', value: 100 },
+    {name: '\n**Carnivores**,', value: 0 },
+    {name: 'Herrerasaurus', value: 10 },
+    {name: 'Austroraptor', value: 10 },
+    {name: 'Utahraptor', value: 30 },
+    {name: 'Dilophosaurus', value: 30 },
+    {name: 'Baryonyx', value: 30 },
+    {name: 'JuvCeratosaurus', value: 30 },
+    {name: 'Ceratosaurus', value: 40 },
+    {name: 'Carnotaurus', value: 40 },
+    {name: 'Allosaurus', value: 50 },
+    {name: 'Albertosaurus', value: 50 },
+    {name: 'Suchosaurus', value: 50 },
+    {name: 'SubTyrannosaurus', value: 50 },
+    {name: 'SubGiganotosaurus', value: 50 },
+    {name: 'Acrosaurus', value: 70 },
+    {name: 'Tyrannosaurus', value: 90 },
+    {name: 'Giganotosaurus', value: 90 },
+    {name: 'Spinosaurus', value: 100 },
 ];
 
 const exp_base = 100;

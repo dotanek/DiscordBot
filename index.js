@@ -18,6 +18,8 @@ const image = require('./commands/image.js');
 
 const killDino = require('./commands/kill-dino.js');
 const randomDino = require('./commands/random-dino.js');
+const levelDino = require('./commands/level-dino.js');
+const statsDino = require('./commands/stats-dino.js');
 
 const help = {
     name: 'help',
@@ -97,6 +99,8 @@ client.on('message', async msg => {
             case 'help': help.run(msg,args); break;
             case 'kill-dino': killDino.run(msg,args); break;
             case 'random-dino': randomDino.run(msg,args); break;
+            case 'level-dino': levelDino.run(msg,args); break;
+            case 'stats-dino': statsDino.run(msg,args); break;
         }
     }
 });
