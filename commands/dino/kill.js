@@ -1,15 +1,11 @@
 const Discord = require('discord.js');
-const mongoose = require('../database/mongoose.js');
-const models = require('../database/models.js')
+const mongoose = require('../../database/mongoose.js');
+const models = require('../../database/models.js')
 
 module.exports = {
-    name: 'kill-dino',
+    name: 'kill',
     description: 'Registers a dinosaur kill.',
     run: async (msg,args) => {
-
-        if (msg.channel.guild.id != '690982329836896266') {
-            return msg.channel.send('This command is dedicated to a diffrent discord server.');
-        }
 
         if (args.length == 0) {
             let embed = new Discord.MessageEmbed()
@@ -129,7 +125,7 @@ const dinosaurs = [
     {name: 'Carnotaurus', value: 40 },
     {name: 'Allosaurus', value: 50 },
     {name: 'Albertosaurus', value: 50 },
-    {name: 'Suchosaurus', value: 50 },
+    {name: 'Suchomimus', value: 50 },
     {name: 'SubTyrannosaurus', value: 50 },
     {name: 'SubGiganotosaurus', value: 50 },
     {name: 'Acrosaurus', value: 70 },

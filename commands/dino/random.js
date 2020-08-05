@@ -1,11 +1,7 @@
 module.exports = {
-    name: 'random-dino',
-    description: "Picks a random dinosaur from 'The Isle'.",
+    name: 'random',
+    description: "Picks a random dinosaur.",
     run: async (msg,args) => {
-
-        if (msg.channel.guild.id != '690982329836896266') {
-            return msg.channel.send('This command is dedicated to a diffrent discord server.');
-        }
 
         let regex = /^\<\@\!?[0-9]*\>$/g;
         let user;

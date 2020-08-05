@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
-const mongoose = require('../database/mongoose.js');
-const models = require('../database/models.js')
+const mongoose = require('../../database/mongoose.js');
+const models = require('../../database/models.js')
 
 module.exports = {
-    name: 'level-dino',
+    name: 'level',
     description: 'Shows your current level and xp.',
     run: async (msg,args) => {
 
