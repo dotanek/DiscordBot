@@ -24,7 +24,7 @@ module.exports = {
             embed
                 .setTitle('DotBot commands')
                 .addFields(fields)
-                setFooter(`Type '.help <command>'' for details.`);
+                .setFooter(`Type '.help <command>'' for details.`);
         }
 
         msg.channel.send(embed);
