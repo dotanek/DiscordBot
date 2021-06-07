@@ -55,8 +55,8 @@ client.on('message', async msg => {
             case 'image': image.run(msg,args); break;
             case 'help': help.run(msg,args,runnables); break;
             case 'dino': dino.run(msg,args); break;
-            case 'kekpoint': kekpoint.run(msg,args); break;
-            case 'give-gun': givegun.run(msg,args); break;
+            //case 'kekpoint': kekpoint.run(msg,args); break;
+            //case 'give-gun': givegun.run(msg,args); break;
         }
     }
 });
