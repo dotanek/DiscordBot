@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "dotanek",
   "license": "ISC",
@@ -13,7 +13,10 @@
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
+    "fs": "*",
+    "jimp": "^0.16.1",
     "mongoose": "^5.9.26",
+    "nodemon": "^2.0.7",
     "request": "^2.88.2"
   }
 }

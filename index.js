@@ -14,7 +14,10 @@ const image = require('./commands/image.js');
 const dino = require('./commands/dino.js');
 const help = require('./commands/help.js');
 
-const runnables = [ping,count,answer,image,dino,help];
+const givegun = require('./commands/give-gun.js');
+const kekpoint = require('./commands/kekpoint.js');
+
+const runnables = [ping,count,answer,image,dino,help,kekpoint,givegun];
 
 // ---------------------- Discord ---------------------- //
 
@@ -45,14 +48,6 @@ client.on('message', async msg => {
         let args = msg.content.substr(prefix.length).split(' ');
         let command = args.shift();
 
-        /*let runnable = runnables.find(r => r.name == command);
-
-        if (typeof runnable != 'undefined') {
-            runnable.run(msg,args);
-        } else {
-            console.log('Unrecognized command.');
-        }*/
-
         switch(command) {
             case 'ping': ping.run(msg,args); break;
             case 'count': count.run(msg,args); break;
@@ -60,6 +55,8 @@ client.on('message', async msg => {
             case 'image': image.run(msg,args); break;
             case 'help': help.run(msg,args,runnables); break;
             case 'dino': dino.run(msg,args); break;
+            case 'kekpoint': kekpoint.run(msg,args); break;
+            case 'give-gun': givegun.run(msg,args); break;
         }
     }
 });
@@ -68,3 +65,13 @@ client.on('message', async msg => {
 
 mongoose.init(client,db_password);
 client.login(token);
+
+
+
+/*let runnable = runnables.find(r => r.name == command);
+
+if (typeof runnable != 'undefined') {
+    runnable.run(msg,args);
+} else {
+    console.log('Unrecognized command.');
+}*/

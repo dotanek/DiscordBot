@@ -9,7 +9,7 @@ module.exports = {
     description: "Contains all 'Dino train' server dedicated commands.",
     run: async (msg,args) => {
 
-        if (msg.channel.guild.id != '690982329836896266') {
+        if (msg.channel.guild.id != '690982329836896266' && msg.channel.guild.id != '844498332574679063') {
             return msg.channel.send('This command is dedicated to a diffrent discord server.');
         }
 
